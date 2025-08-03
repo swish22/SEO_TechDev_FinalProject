@@ -1,0 +1,42 @@
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  
+
+APIKEY = os.getenv("YOUTUBE_API_KEY")  # need to fix this.... sigh...... ask em 
+
+mood_links = {
+    "happy": "PLgzTt0k8mXzF2fleyxQ17JxeccHFC8Gxp",
+    "sad": "PL3-sRm8xAzY-w9GS19pLXMyFRTuJcuUjy",
+    "stressed": "_BtXPQimVhg",
+    "studying": "lTRiuFIWV54",
+    "lana mood": "RDF_pWdsfIXjk",
+    "ariana mood": "PLuw53-DFstpSo_LrYWD1w9rKXPYZy5qc7"
+}
+
+# add more maybe!
+
+def get_link_by_mood(mood):
+    mood = mood.lower().strip()
+
+    link_id = mood_links.get(mood)
+    if not link_id:
+        return "Oh no, the mood was not found. Maybe, try another one?"
+
+
+    if link_id.startswith("PL") or link_id.startswith("RD"):
+        return f"https://www.youtube.com/playlist?list={link_id}"
+    else:
+        return f"https://www.youtube.com/watch?v={link_id}"
+
+
+if __name__ == "__main__":
+    print("Vibe Room")
+    print("Available moods:", ", ".join(mood_links.keys()))
+    user_input = input("What mood are you in right now? > ")
+
+    
+ # get that fixedddd
+    result = get_link_by_mood(user_input)
+    print("\nHere’s your link:")
+    print(result)
